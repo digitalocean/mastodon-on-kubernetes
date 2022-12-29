@@ -1,0 +1,84 @@
+# ============================== DOKS CONFIG ==============================
+
+doks_cluster_name_prefix = "mastodon-k8s"
+doks_k8s_version         = "1.25"
+doks_cluster_region      = "nyc1"
+
+# Main pool configuration (REQUIRED)
+
+doks_default_node_pool = {
+  name       = "mastodo-main"
+  node_count = 3
+  size       = "s-2vcpu-4gb"
+}
+
+# Create additional DOKS node pools 
+# Dedicated node pools are useful to spread the load 
+#  created by each component, such as: web, streaming or sideqkiq (OPTIONAL)
+
+# doks_additional_node_pools = {
+#   "mastodon-web" = {
+#     node_count = 1
+#     size       = "s-2vcpu-4gb"
+#   },
+#   "mastodon-streaming" = {
+#     node_count = 1
+#     size       = "s-2vcpu-4gb"
+#   },
+#   "mastodon-sidekiq" = {
+#     node_count = 1
+#     size       = "s-2vcpu-4gb"
+#   }
+# }
+
+# ================================== MASTODON CONFIG ==================================
+
+# Mastodon Helm release is disabled for now because it is not working properly in Terraform
+enable_mastodon_helm_release        = false
+mastodon_helm_repo                  = "https://charts.bitnami.com/bitnami"
+mastodon_helm_chart                 = "mastodon"
+mastodon_helm_chart_version         = "0.1.2" # maps to app version 4.0.2
+mastodon_helm_release_name          = "mastodon"
+mastodon_helm_chart_timeout_seconds = 600
+mastodon_k8s_namespace              = "mastodon"
+
+# Sets the domain name for your Mastodon instance (REQUIRED)
+mastodon_web_domain                 = "<YOUR_DOMAIN_NAME_HERE>"
+
+# Each affinity label value matches key name from `doks_additional_node_pools` variable
+# The scheduler will try at best to schedule the Pods on the desired nodes
+
+# mastodon_web_component_node_affinity_label       = "mastodon-web"
+# mastodon_streaming_component_node_affinity_label = "mastodon-streaming"
+# mastodon_sidekiq_component_node_affinity_label   = "mastodon-sidekiq"
+
+# mastodon_additional_helm_values_file = "mastodon-helm-values.yaml"
+
+# ===================== EXTERNAL POSTGRES CONFIG (DO MANAGED) =====================
+
+# enable_external_postgresql      = true
+# pg_cluster_name                 = "pg-mastodon"
+# pg_cluster_version              = "14"
+# pg_cluster_region               = "nyc1"
+# pg_cluster_size                 = "db-s-1vcpu-1gb"
+# pg_cluster_node_count           = 1
+# pg_cluster_db_name              = "mastodon"
+# pg_cluster_db_user              = "mastodon"
+# pg_cluster_connection_pool_size = 20
+
+# ===================== EXTERNAL REDIS CONFIG (DO MANAGED) =======================
+
+# enable_external_redis    = true
+# redis_cluster_name       = "redis-mastodon"
+# redis_cluster_version    = "7"
+# redis_cluster_region     = "nyc1"
+# redis_cluster_size       = "db-s-1vcpu-1gb"
+# redis_cluster_node_count = 1
+
+# ======================= EXTERNAL S3 CONFIG (DO MANAGED) =========================
+
+# enable_external_s3          = true
+# s3_bucket_name              = "mastodon-st"
+# s3_bucket_region            = "nyc3"
+# s3_bucket_access_key_id     = "<YOUR_DO_SPACES_ACCESS_KEY_ID_HERE>"
+# s3_bucket_access_key_secret = "<YOUR_DO_SPACES_ACCESS_KEY_SECRET_HERE>"
