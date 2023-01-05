@@ -181,7 +181,7 @@ Follow below steps to deploy Mastodon on your DOKS cluster via Helm:
 
     helm repo update bitnami
 
-    helm search repo bitnami | grep mastodon
+    helm search repo bitnami | grep mastodon/mastodon
     ```
 
     The output looks similar to the following:

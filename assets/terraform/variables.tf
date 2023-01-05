@@ -1,3 +1,8 @@
+# ===================== DO CONFIG VARS =======================
+variable "do_token" {
+  description = "Personal Access Token to access the DigtialOcean API)"
+}
+
 # ===================== DOKS CONFIG VARS =======================
 
 variable "doks_cluster_name_prefix" {
@@ -19,7 +24,7 @@ variable "doks_cluster_region" {
 }
 
 variable "doks_default_node_pool" {
-  type = map
+  type = map(any)
   default = {
     name       = "mastodon-default"
     node_count = 2
@@ -29,16 +34,16 @@ variable "doks_default_node_pool" {
 }
 
 variable "doks_additional_node_pools" {
-  type = map
-  default = {}
+  type        = map(any)
+  default     = {}
   description = "DOKS cluster extra node pool configuration"
 }
 
 # =============== MASTODON CONFIG VARS ==================
 
 variable "enable_mastodon_helm_release" {
-  type = bool
-  default = true
+  type        = bool
+  default     = true
   description = "Enable/disable Bitnami Mastodon Helm chart deployment on DOKS"
 }
 
@@ -78,28 +83,28 @@ variable "mastodon_k8s_namespace" {
 }
 
 variable "mastodon_web_component_node_affinity_label" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "mastodon_streaming_component_node_affinity_label" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "mastodon_sidekiq_component_node_affinity_label" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "mastodon_web_domain" {
-  type = string
+  type        = string
   description = "Sets the domain name for your Mastodon instance (REQUIRED)"
 }
 
 variable "mastodon_additional_helm_values_file" {
-  type = string
-  default = "mastodon-helm-values.yaml"
+  type        = string
+  default     = "mastodon-helm-values.yaml"
   description = "Additional Helm values to use"
 }
 
@@ -228,13 +233,13 @@ variable "s3_bucket_region" {
 variable "s3_bucket_access_key_id" {
   type        = string
   sensitive   = true
-  default = ""
+  default     = ""
   description = "Mastodon DO Spaces S3 bucket access key id"
 }
 
 variable "s3_bucket_access_key_secret" {
   type        = string
   sensitive   = true
-  default = ""
+  default     = ""
   description = "Mastodon DO Spaces S3 bucket access key secret"
 }

@@ -5,7 +5,7 @@ locals {
 }
 
 resource "helm_release" "mastodon" {
-  count            = var.enable_mastodon_helm_releases ? 1 : 0
+  count            = var.enable_mastodon_helm_release ? 1 : 0
   name             = var.mastodon_helm_release_name
   namespace        = var.mastodon_k8s_namespace
   repository       = var.mastodon_helm_repo
