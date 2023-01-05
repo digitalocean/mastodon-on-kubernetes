@@ -23,7 +23,7 @@ locals {
 }
 
 provider "digitalocean" {
-  token = var.do_token
+  token             = var.do_token
   spaces_access_id  = var.s3_bucket_access_key_id
   spaces_secret_key = var.s3_bucket_access_key_secret
   # Provider is configured using environment variables:
