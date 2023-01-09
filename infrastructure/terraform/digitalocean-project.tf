@@ -1,5 +1,5 @@
 resource "digitalocean_project" "playground" {
-  name        = "twitter"
+  name        = "mastodon-on-do"
   description = "A project to run Mastodon on DigitalOcean."
   purpose     = "Web Application"
   environment = "Production"

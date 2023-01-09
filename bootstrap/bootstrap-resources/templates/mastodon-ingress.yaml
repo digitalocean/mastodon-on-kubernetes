@@ -1,0 +1,36 @@
+{{- if .Values.domain }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-issuer
+    meta.helm.sh/release-namespace: mastodon
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+  name: mastodon-ingress
+  namespace: mastodon
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: {{ .Values.domain }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: mastodon-web
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+      - backend:
+          service:
+            name: mastodon-streaming
+            port:
+              number: 80
+        path: /api/v1/streaming/
+        pathType: Exact
+  tls:
+  - hosts:
+    - {{ .Values.domain }}
+    secretName: mastodon-tls
+{{- end }}

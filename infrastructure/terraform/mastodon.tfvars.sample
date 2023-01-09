@@ -33,26 +33,12 @@ doks_default_node_pool = {
 
 # ================================== MASTODON CONFIG ==================================
 
-# Mastodon Helm release is disabled for now because it is not working properly in Terraform
-enable_mastodon_helm_release        = false
-mastodon_helm_repo                  = "https://charts.bitnami.com/bitnami"
-mastodon_helm_chart                 = "mastodon"
-mastodon_helm_chart_version         = "0.1.2" # maps to app version 4.0.2
-mastodon_helm_release_name          = "mastodon"
-mastodon_helm_chart_timeout_seconds = 600
-mastodon_k8s_namespace              = "mastodon"
-
-# Sets the domain name for your Mastodon instance (REQUIRED)
-mastodon_web_domain                 = "<YOUR_DOMAIN_NAME_HERE>"
-
 # Each affinity label value matches key name from `doks_additional_node_pools` variable
 # The scheduler will try at best to schedule the Pods on the desired nodes
 
 # mastodon_web_component_node_affinity_label       = "mastodon-web"
 # mastodon_streaming_component_node_affinity_label = "mastodon-streaming"
 # mastodon_sidekiq_component_node_affinity_label   = "mastodon-sidekiq"
-
-# mastodon_additional_helm_values_file = "mastodon-helm-values.yaml"
 
 # ===================== EXTERNAL POSTGRES CONFIG (DO MANAGED) =====================
 
