@@ -1,3 +1,5 @@
+# Argo CD Helm chart overrides
+# High Availability mode with autoscaling
 redis-ha:
   enabled: true
 

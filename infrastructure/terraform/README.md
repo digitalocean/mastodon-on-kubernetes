@@ -2,7 +2,7 @@
 
 ## Overview
 
-This section will use [Terraform](https://www.terraform.io/) to provision the DigitalOcean infrastructure to run Mastodon.
+This section describes the usage of [Terraform](https://www.terraform.io/) to provision the DigitalOcean infrastructure to run Mastodon.
 
 The Terraform code provided in this repository provisions the following:
 
@@ -16,7 +16,9 @@ All essential aspects are configured via Terraform input variables. In addition,
 
 ## Requirements
 
-The only requirement is [Terraform CLI](https://developer.hashicorp.com/terraform/downloads) installed on your machine and at least some basic knowledge about the tool and main concepts. In addition, it is mandatory to have your DigitalOcean access token.
+ - [Terraform CLI](https://developer.hashicorp.com/terraform/downloads)
+ - [doctl CLI](https://docs.digitalocean.com/reference/doctl/how-to/install/)
+ - [DigitalOcean access token](https://docs.digitalocean.com/reference/doctl/how-to/install/)
 
 ## Using Terraform to Provision Mastodon Infrastructure
 
@@ -49,3 +51,13 @@ Follow the below steps to get started:
     ```
 
 If everything goes as planned, you should be able to see all infrastructure components provisioned and configured as stated in the `mastodon.tfvars` input configuration file.
+
+
+7. use [doctl](https://docs.digitalocean.com/reference/doctl/reference/kubernetes/) to update your Kubernetes context
+
+```bash
+# <cluster-id> can be found in the output of the terraform module
+doctl kubernetes cluster kubeconfig save <cluster-id>
+```
+
+[Next steps.](../../mastodon/README.md)
