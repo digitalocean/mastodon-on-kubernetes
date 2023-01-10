@@ -1,4 +1,4 @@
-
+## Mastodon Bitnami chart values
 ## @section Mastodon common parameters
 ##
 ## Enable diagnostic mode in the deployment
@@ -18,13 +18,13 @@ diagnosticMode:
 
 ## @param adminUser Mastodon admin username
 ##
-adminUser: "abhi"
+adminUser: ""
 ## @param adminEmail Mastodon admin email
 ##
-adminEmail: "hivenetes@gmail.com"
+adminEmail: ""
 ## @param adminPassword Mastodon admin password
 ##
-adminPassword: "admin"
+adminPassword: ""
 
 ## @param enableSearches Enable the search engine (uses Elasticsearch under the hood)
 ##
@@ -36,7 +36,7 @@ enableS3: true
 
 ## @param webDomain Web domain for Mastodon
 ##
-webDomain: "mastodon.hivenetes.com"
+webDomain: ""
 
 ## @section Mastodon Web Parameters
 ##
