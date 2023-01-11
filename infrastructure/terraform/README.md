@@ -4,6 +4,8 @@
 
 This section describes the usage of [Terraform](https://www.terraform.io/) to provision the DigitalOcean infrastructure to run Mastodon.
 
+<img src="../../docs/assets/mok-infra.png" alt="drawing" width="700" height=300/>
+
 The Terraform code provided in this repository provisions the following:
 
 -  DigitalOcean Kubernetes cluster [digitalocean-kubernetes.tf](./digitalocean-kubernetes.tf)
@@ -60,4 +62,4 @@ If everything goes as planned, you should be able to see all infrastructure comp
 doctl kubernetes cluster kubeconfig save <cluster-id>
 ```
 
-[Next steps.](../../mastodon/README.md)
+[**Next steps.**](../../mastodon/README.md)

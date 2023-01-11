@@ -10,7 +10,7 @@ doks_cluster_region      = "ams3"
 # Main pool configuration (REQUIRED)
 
 doks_default_node_pool = {
-  name       = "mastodo-main"
+  name       = "mastodon-main"
   node_count = 3
   size       = "s-4vcpu-8gb"
 }
