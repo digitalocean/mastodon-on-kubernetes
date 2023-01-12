@@ -1,4 +1,4 @@
-## Bootstrap
+# Bootstrapping using Argo CD
 
 The bootstrapper leverages the ArgoCD's "App of Apps" pattern. Here we use Helm package management to achieve this.
 

@@ -11,12 +11,12 @@ From an architectural point of view, Mastodon follows a decentralized approach c
 At its heart, the Mastodon stack is powered by the following components:
 
 1. The ***main backend*** is written in Ruby implementing core logic (using the Ruby on Rails framework). It also implements the web frontend for all users.
-2. A ***streaming engine*** implemented using NodeJS used for real-time feed updates.
-3. ***Sidekiq*** jobs used by the primary backend to propagate data to other Mastodon instances.
-4. An in-memory database (***Redis***) is used for caching and as data storage for Mastodon Sidekiq jobs.
-5. A ***PostgreSQL database*** is the primary storage for all posts and media. This is the source of truth for the whole system.
-6. An ***ElasticSearch engine*** (optionally) is used to index and search for posts you have authored, favorited, or mentioned.
-7. ***S3 storage*** for the rest of persisted data, such as media caching.
+2. A ***streaming engine*** implemented using NodeJS used for real-time feed updates
+3. ***Sidekiq*** jobs used by the primary backend to propagate data to other Mastodon instances
+4. An in-memory database (***Redis***) is used for caching and as data storage for Mastodon Sidekiq jobs
+5. A ***PostgreSQL database*** is the primary storage for all posts and media. This is the source of truth for the whole system
+6. An ***ElasticSearch engine*** (optionally) is used to index and search for posts you have authored, favourited, or mentioned
+7. ***S3 storage*** for the rest of persisted data, such as media caching
 
 ## Overview
 
@@ -38,3 +38,5 @@ Follow the guide in the order stated below:
 Here is the overview of the architecture that we will set up:
 
 <img src="./docs/assets/mok-overview.png" alt="mok-overview" width=800 height=450/>
+
+**Happy Mastodoning!**

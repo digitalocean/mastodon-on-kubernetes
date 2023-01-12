@@ -102,5 +102,4 @@ This section will walk you through installing Mastodon on Kubernetes using [Bitn
 
     Once the chart has been successfully installed, you can log in to your mastodon server via the domain used during the installation. 
 
-
-**Happy Mastodoning!**
+[**Next steps »**](../observability/README.md)
