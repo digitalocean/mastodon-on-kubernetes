@@ -1,0 +1,67 @@
+# ===================== DigitalOcean Access CONFIG =====================
+do_token = "<required>"
+
+# ===================== DigitalOcean Kubernetes CONFIG =====================
+
+doks_cluster_name_prefix = "prod-ready-mastodon"
+doks_k8s_version         = "1.25"
+doks_cluster_region      = "ams3"
+
+# Main pool configuration (REQUIRED)
+
+doks_default_node_pool = {
+  name       = "mastodon-main"
+  node_count = 3
+  size       = "s-4vcpu-8gb"
+}
+
+# Create additional DOKS node pools 
+# Dedicated node pools are useful to spread the load 
+#  created by each component, such as: web, streaming or sideqkiq (OPTIONAL)
+
+doks_additional_node_pools = {
+  "mastodon-web" = {
+    node_count = 1
+    size       = "s-2vcpu-4gb"
+  },
+  "mastodon-streaming" = {
+    node_count = 1
+    size       = "s-2vcpu-4gb"
+  },
+  "mastodon-sidekiq" = {
+    node_count = 1
+    size       = "s-2vcpu-4gb"
+  }
+}
+# ===================== EXTERNAL POSTGRES CONFIG (DigitalOcean MANAGED) =====================
+
+enable_external_postgresql      = true
+pg_cluster_name                 = "pg-mastodon"
+pg_cluster_version              = "14"
+pg_cluster_region               = "ams3"
+pg_cluster_size                 = "db-s-1vcpu-1gb"
+pg_cluster_node_count           = 1
+pg_cluster_db_name              = "mastodon"
+pg_cluster_db_user              = "mastodon"
+pg_cluster_connection_pool_size = 20
+
+# ======================= EXTERNAL SPACES S3 CONFIG (DigitalOcean MANAGED) =========================
+
+enable_external_s3          = true
+s3_bucket_name              = "mastodon"
+s3_bucket_region            = "ams3"
+s3_bucket_access_key_id     = "<required>"
+s3_bucket_access_key_secret = "<required>"
+
+
+# ===================== ARGOCD CONFIG =====================
+
+enable_argocd_helm_release        = true
+argocd_helm_repo                  = "https://argoproj.github.io/argo-helm"
+argocd_helm_chart                 = "argo-cd"
+argocd_helm_chart_version         = "5.16.14"
+argocd_helm_release_name          = "argocd"
+argocd_helm_chart_timeout_seconds = 600
+argocd_k8s_namespace              = "argocd"
+
+# argocd_additional_helm_values_file = "argocd-ha-helm-values.yaml"

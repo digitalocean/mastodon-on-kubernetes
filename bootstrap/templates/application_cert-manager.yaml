@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: 'https://charts.jetstack.io'
+    targetRevision: v1.9.2
+    helm:
+      parameters:
+        - name: installCRDs
+          value: 'true'
+        - name: prometheus.servicemonitor.enabled
+          value: 'false'
+        - name: prometheus.servicemonitor.honorLabels
+          value: 'false'
+    chart: cert-manager
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: cert-manager
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
