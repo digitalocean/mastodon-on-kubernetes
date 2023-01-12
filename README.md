@@ -20,18 +20,21 @@ At its heart, the Mastodon stack is powered by the following components:
 
 ## Overview
 
-Here is the overview of the architecture that we will set up. 
-
-<img src="./docs/assets/mok-overview.png" alt="mok-overview" width=800 height=450/>
-
 ```bash
+# Repository structure
 .
-├── README.md 
+├── README.md
 ├── bootstrap # cluster bootstrapping using Argo CD
 ├── docs # documents and assets
-├── infrastructure # infrastructure automation using Terraform
-└── mastodon # mastodon installation and helm chart overrides
+├── infrastructure  # infrastructure automation using Terraform
+├── mastodon  # mastodon installation 
+└── observability # set up observability stack
 ```
 Follow the guide in the order stated below:
 1. [DigitalOcean Infrastructure Automation via Terraform ](./infrastructure/terraform/README.md)
 2. [Mastodon installation using Bitnami Helm chart](./mastodon/README.md)
+3. [Set up Observability using Robusta](./observability/README.md)
+
+Here is the overview of the architecture that we will set up:
+
+<img src="./docs/assets/mok-overview.png" alt="mok-overview" width=800 height=450/>

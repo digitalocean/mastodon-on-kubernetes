@@ -4,7 +4,8 @@ This section will walk you through installing Mastodon on Kubernetes using [Bitn
 
 ## Requirements
 
-- [DigitalOcean Infrastructure](../infrastructure/terraform/README.md) 
+- [DigitalOcean Infrastructure](../infrastructure/terraform/README.md)
+- [doctl CLI](https://docs.digitalocean.com/reference/doctl/how-to/install/)
 - [helm](https://helm.sh/docs/intro/install/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 
@@ -26,7 +27,7 @@ This section will walk you through installing Mastodon on Kubernetes using [Bitn
 
 2. **DigitalOcean Spaces (Static Object Storage) Access**
 
-    We need to create Spaces access keys and the secret to access the [Spaces API.](https://docs.digitalocean.com/reference/api/spaces-api/). Follow the *[Creating an Access Key](https://www.digitalocean.com/community/tutorials/how-to-create-a-digitalocean-space-and-api-key)* section to generate the access key and secret. 
+    We need to create Spaces access keys and the secret to access the [Spaces API](https://docs.digitalocean.com/reference/api/spaces-api/). Follow the *[Creating an Access Key](https://www.digitalocean.com/community/tutorials/how-to-create-a-digitalocean-space-and-api-key)* section to generate the access key and secret. 
 
 3. **Create the Kubernetes Secrets**
 
@@ -54,6 +55,7 @@ This section will walk you through installing Mastodon on Kubernetes using [Bitn
     kubectl create -n cert-manager secret generic lets-encrypt-do-dns \
     --from-literal=access-token=<insert DO access token>
     ```
+    >**Note**: It is a good practice to use a secret store such as Hashicorp Vault. [Here](https://www.digitalocean.com/community/tutorials/how-to-access-vault-secrets-inside-of-kubernetes-using-external-secrets-operator-eso) is a tutorial to access Vault secrets using [k8s-external-secrets-operator.](https://github.com/external-secrets/external-secrets/)
 4. **Bootstrap the Kubernetes Cluster**
 
     We have leveraged the [hivenetes/k8s-bootstrapper](https://github.com/hivenetes/k8s-bootstrapper) project, which under the hood uses [Argo CD: App of Apps pattern](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/) to install and manage essential applications such as, 
@@ -61,6 +63,7 @@ This section will walk you through installing Mastodon on Kubernetes using [Bitn
     - [Cert-Manager](https://cert-manager.io/)
     - [Metrics-Server](https://github.com/kubernetes-sigs/metrics-server)
 
+    Check out [this doc](../bootstrap/README.md) for more details on the bootstrap process. 
     ```bash
     # Let the bootstrap begin!
     kubectl apply -f https://raw.githubusercontent.com/diabhey/mastodon-blueprint-kubernetes/mastodon-on-do/bootstrap/bootstrap.yaml
@@ -70,7 +73,7 @@ This section will walk you through installing Mastodon on Kubernetes using [Bitn
 
 5. **Configure DNS**
 
-    Once the installation is complete, copy the *EXTERNALIP* of the LoadBalancer, as we need this to configure our DNS records.
+    Once the installation is complete, copy the *EXTERNAL-IP* of the LoadBalancer, as we need this to configure our DNS records.
     ```bash
     # Copy the EXTERNAL_IP of the LoadBalancer
     kubectl get services --namespace traefik traefik --output jsonpath='{.status.loadBalancer.ingress[0].ip}'; echo
@@ -80,7 +83,7 @@ This section will walk you through installing Mastodon on Kubernetes using [Bitn
     - If you are managing the DNS records via [DigitalOcean DNS](https://docs.digitalocean.com/products/networking/dns/), then you can execute the following command:  
     ```bash
     # Add the LoadBalancer IP to the domain using doctl
-    doctl compute domain records create <domain> --record-name mastodon --record-type A --record-data <EXTERNAL_IP>
+    doctl compute domain records create <domain> --record-name mastodon --record-type A --record-data <EXTERNAL-IP>
     # This means that the mastodon instance will be accessed via mastodon.domain
     ```
 6. **Install Mastodon via Bitnami Helm chart**

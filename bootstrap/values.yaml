@@ -2,4 +2,4 @@
 domain: "mastodon.hivenetes.com"
 # Application specific
 traefik:
-  enable: true  
+  enable: true

@@ -62,4 +62,4 @@ If everything goes as planned, you should be able to see all infrastructure comp
 doctl kubernetes cluster kubeconfig save <cluster-id>
 ```
 
-[**Next steps.**](../../mastodon/README.md)
+[**Next steps »**](../../mastodon/README.md)
