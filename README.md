@@ -37,6 +37,7 @@ Follow the guide in the order stated below:
 
 Here is the overview of the architecture that we will set up:
 
-<img src="./docs/assets/mok-overview.png" alt="mok-overview" width=800 height=450/>
+<!-- <img src="./docs/assets/mok-overview.png" alt="mok-overview" width=800 height=450/> -->
+![mok-overview](./docs/assets/mok-overview.png)
 
 **Happy Mastodoning!**

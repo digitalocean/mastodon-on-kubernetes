@@ -14,7 +14,7 @@ The Terraform code provided in this repository provisions the following:
 
 All essential aspects are configured via Terraform input variables. In addition, a [mastodon.tfvars.sample](./mastodon.tfvars.sample) file is provided to get you started quickly.
 
-<img src="../../docs/assets/mok-infra.png" alt="drawing" width="700" height=300/>
+<img src="../../docs/assets/mok-infra.png" alt="mok-infra" width="700" height=300/>
 
 ## Requirements
 
