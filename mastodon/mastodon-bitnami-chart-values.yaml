@@ -17,13 +17,13 @@ diagnosticMode:
     - infinity
 
 ## @param adminUser Mastodon admin username
-##
+## [REQUIRED]
 adminUser: ""
 ## @param adminEmail Mastodon admin email
-##
+## [REQUIRED]
 adminEmail: ""
 ## @param adminPassword Mastodon admin password
-##
+## [REQUIRED]
 adminPassword: ""
 
 ## @param enableSearches Enable the search engine (uses Elasticsearch under the hood)
@@ -35,7 +35,7 @@ enableSearches: true
 enableS3: true
 
 ## @param webDomain Web domain for Mastodon
-##
+## [REQUIRED]
 webDomain: ""
 
 ## @section Mastodon Web Parameters
@@ -71,7 +71,8 @@ streaming:
 ## @param externalDatabase.existingSecretPasswordKey Name of an existing secret key containing the database credentials
 ##
 externalDatabase:
-  host: ""
+  # host:  pg-mastodon-do-user-xxxxxxx-0.b.db.ondigitalocean.com
+  host: "[REQUIRED]"
   port: 25060
   user: doadmin
   database: defaultdb

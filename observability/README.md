@@ -38,3 +38,14 @@ Upon successful installation, you will be taken to [https://platform.robusta.dev
 
 **Slack integration**
 ![robusta-slack](../docs/assets/robusta-slack.png)
+
+## Access Grafana Dashboards(optional)
+
+```bash
+# Expose the robusta-grafana service and login with the credentials on localhost:3000
+kubectl -n default port-forward svc/robusta-grafana 3000:80
+# Open the browser and go to localhost:3000 to access Argo CD UI
+# Login with username: `admin,` password: `prom-operator`
+```
+
+![robusta-grafana](../docs/assets/robusta-grafana.png)
