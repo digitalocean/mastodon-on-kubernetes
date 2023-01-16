@@ -28,6 +28,9 @@ resource "digitalocean_database_connection_pool" "mastodon_pg_connection_pool" {
   size       = var.pg_cluster_connection_pool_size
   db_name    = var.pg_cluster_db_name
   user       = var.pg_cluster_db_user
+  depends_on = [
+    digitalocean_database_cluster.mastodon_pg
+  ]
 }
 
 resource "digitalocean_database_firewall" "mastodon_pg_firewall" {
@@ -37,4 +40,7 @@ resource "digitalocean_database_firewall" "mastodon_pg_firewall" {
     type  = "k8s"
     value = digitalocean_kubernetes_cluster.mastodon.id
   }
+  depends_on = [
+    digitalocean_kubernetes_cluster.mastodon
+  ]
 }
