@@ -29,7 +29,7 @@ traefik:
 
 > **Note:** Save changes to the file as deemed fit and push the changes to the git repository. The bootstrapper follows a strict GitOps workflow, so all the changes need to be pushed to git to reflect the changes in the Kubernetes cluster.
 
-**Access the ArgoCD Web UI**
+### Access the ArgoCD Web UI
 
 ```bash
 # Get the argo password
