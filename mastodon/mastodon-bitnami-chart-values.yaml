@@ -45,6 +45,15 @@ web:
   ##
   replicaCount: 2
 
+
+  ## Scheduling the Mastodon Web component Pods on a dedicated node pool 
+  ## (assumes the node pool was tagged using mastodon-web)
+  nodeAffinityPreset:
+    type: "hard"
+    key: "doks.digitalocean.com/node-pool"
+    values:
+      - "mastodon-web"  
+
 ## @section Mastodon Sidekiq Parameters
 ##
 sidekiq:
@@ -52,12 +61,28 @@ sidekiq:
   ##
   replicaCount: 2
 
+
+  ## Scheduling the Mastodon Sidekiq component Pods on a dedicated node pool 
+  ## (assumes the node pool was tagged using mastodon-sidekiq)
+  nodeAffinityPreset:
+    type: "hard"
+    key: "doks.digitalocean.com/node-pool"
+    values:
+      - "mastodon-sidekiq"  
+
 ## @section Mastodon Streaming Parameters
 ##
 streaming:
   ## @param streaming.replicaCount Number of Mastodon streaming replicas to deploy
   ##
   replicaCount: 2
+  ## Scheduling the Mastodon Streaming component Pods on a dedicated node pool 
+  ## (assumes the node pool was tagged using mastodon-streaming)
+  nodeAffinityPreset:
+    type: "hard"
+    key: "doks.digitalocean.com/node-pool"
+    values:
+      - "mastodon-streaming"    
 
 ## @section External PostgreSQL configuration
 ##
@@ -95,8 +120,9 @@ externalDatabase:
 ## @param externalS3.region External S3 region
 ##
 externalS3:
-  # S3 endpoint
-  host: "ams3.digitaloceanspaces.com"
+  # S3 endpoint [REQUIRED]
+  # Edit the fields as per your configuration
+  host: "ams3.digitaloceanspaces.com" # as per your configuration
   port: 443
   accessKeyID: ""
   accessKeySecret: ""
@@ -104,8 +130,8 @@ externalS3:
   existingSecretAccessKeyIDKey: "AWS_ACCESS_KEY_ID"
   existingSecretKeySecretKey: "AWS_SECRET_ACCESS_KEY"
   protocol: "https"
-  bucket: "mastodon"
-  region: "ams3"
+  bucket: "[REQUIRED]"
+  region: "ams3" # as per your configuration
 
 ## @section Redis sub-chart parameters
 ##
