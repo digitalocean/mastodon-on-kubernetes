@@ -14,7 +14,8 @@ This section will walk you through installing Mastodon on Kubernetes using [Bitn
 1. **Retrieve DigitalOcean Managed Postgress Database Credentials**
 
     Mastodon installation requires us to provide database credentials. Since we have provisioned the Managed Postgres Database on DigitalOcean infrastructure, we can retrieve them via `doctl` or the [cloud control panel.](https://cloud.digitalocean.com/login)
-    ```console=
+
+    ```bash
     # List the managed databases on DigitalOcean
     # Copy the <database-id> from the console output
     doctl databases list
@@ -23,17 +24,19 @@ This section will walk you through installing Mastodon on Kubernetes using [Bitn
     doctl databases user get <database-id> <user-name>
 
     # Copy the postgres-password from the console output
+    # You will need it to create the `mastodon-cred` k8s secret
     ```
 
 2. **DigitalOcean Spaces (Static Object Storage) Access**
 
-    We need to create Spaces access keys and the secret to accessing the [Spaces API](https://docs.digitalocean.com/reference/api/spaces-api/). Follow the *[Creating an Access Key](https://www.digitalocean.com/community/tutorials/how-to-create-a-digitalocean-space-and-api-key)* section to generate the access key and secret. 
+    - We need to create Spaces access keys and the secret to accessing the [Spaces API](https://docs.digitalocean.com/reference/api/spaces-api/).
+    - Follow the *[Creating an Access Key](https://www.digitalocean.com/community/tutorials/how-to-create-a-digitalocean-space-and-api-key)* section to generate the access key and secret.
 
 3. **Create the Kubernetes Secrets**
 
     These secrets are referenced in the [mastodon-bitnami-chart-values.yaml](./mastodon-bitnami-chart-values.yaml) file.
 
-    ```bash=
+    ```bash
     # mastodon-creds secret
     # @param postgres-password: DO Managed Postgres Database password 
     # @param AWS_ACCESS_KEY_ID: DO Spaces Access Key
@@ -55,41 +58,49 @@ This section will walk you through installing Mastodon on Kubernetes using [Bitn
     kubectl create -n cert-manager secret generic lets-encrypt-do-dns \
     --from-literal=access-token=<insert DO access token>
     ```
+
     >**Note:** It is a good practice to use a secret store such as Hashicorp Vault. [Here](https://www.digitalocean.com/community/tutorials/how-to-access-vault-secrets-inside-of-kubernetes-using-external-secrets-operator-eso) is a tutorial to access Vault secrets using [k8s-external-secrets-operator.](https://github.com/external-secrets/external-secrets/)
 4. **Bootstrap the Kubernetes Cluster**
 
-    We have leveraged the [hivenetes/k8s-bootstrapper](https://github.com/hivenetes/k8s-bootstrapper) project, which under the hood uses [Argo CD: App of Apps pattern](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/) to install and manage essential applications such as, 
+    We have leveraged the [hivenetes/k8s-bootstrapper](https://github.com/hivenetes/k8s-bootstrapper) project, which under the hood uses [Argo CD: App of Apps pattern](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/) to install and manage essential applications such as,
     - [Traefik: HTTP Reverse Proxy and LoadBalancer](https://github.com/traefik/traefik-helm-chart)
     - [Cert-Manager](https://cert-manager.io/)
     - [Metrics-Server](https://github.com/kubernetes-sigs/metrics-server)
 
-    Check out [this doc](../bootstrap/README.md) for more details on the bootstrap process. 
+    Check out [this doc](../bootstrap/README.md) for more details on the bootstrap process.
+
     ```bash
     # Let the bootstrap begin!
     kubectl apply -f https://raw.githubusercontent.com/digitalocean/mastodon-on-kubernetes/main/bootstrap/bootstrap.yaml
     ```
+
     >**Note:**
     When an Ingress Controller(Traefik) is installed, it creates a service and exposes it as a Load Balancer. When you configure a service as a Load Balancer, DigitalOcean Kubernetes will automatically provision a LoadBalancer in your cloud account.
 
 5. **Configure DNS**
 
     Once the installation is complete, copy the *EXTERNAL-IP* of the LoadBalancer, as we need this to configure our DNS records.
+
     ```bash
     # Copy the EXTERNAL_IP of the LoadBalancer
     kubectl get services --namespace traefik traefik --output jsonpath='{.status.loadBalancer.ingress[0].ip}'; echo
     ```
+
     Head to your domain registrar to configure the DNS as follows:
     - Add an A record for the ***<domain>*** that points to the IP address of the Loadbalancer
     - If you are managing the DNS records via [DigitalOcean DNS](https://docs.digitalocean.com/products/networking/dns/), then you can execute the following command:  
+
     ```bash
     # Add the LoadBalancer IP to the domain using doctl
     doctl compute domain records create <domain> --record-name mastodon --record-type A --record-data <EXTERNAL-IP>
     # This means that the mastodon instance will be accessed via mastodon.domain
     ```
+
 6. **Install Mastodon via Bitnami Helm chart**
-    
-    The [mastodon-bitnami-chart-values.yaml](./mastodon-bitnami-chart-values.yaml) file has the chart overrides. Fill in the sections as per your configuration. 
-    >**Note:** Refer to [values.yaml](https://github.com/bitnami/charts/blob/main/bitnami/mastodon/values.yaml) for configuration specifics. 
+
+    The [mastodon-bitnami-chart-values.yaml](./mastodon-bitnami-chart-values.yaml) file has the chart overrides. Fill in the sections as per your configuration, especially the **[REQUIRED]** fields.
+    >**Note:** Refer to [values.yaml](https://github.com/bitnami/charts/blob/main/bitnami/mastodon/values.yaml) for configuration specifics.
+
     ```bash
     MASTODON_HELM_CHART_VERSION="0.1.2"
     
@@ -100,6 +111,6 @@ This section will walk you through installing Mastodon on Kubernetes using [Bitn
       -f "mastodon-bitnami-chart-values.yaml"
     ```
 
-    Once the chart has been successfully installed, you can log in to your mastodon server via the domain used during the installation. 
+    Once the chart has been successfully installed, you can log in to your mastodon server via the domain used during the installation.
 
 [**Next steps »**](../observability/README.md)

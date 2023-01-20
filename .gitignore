@@ -37,3 +37,6 @@ terraform.rc
 .DS_Store
 
 *.out
+
+# vs code
+*.vscode
