@@ -30,8 +30,10 @@ At its heart, the Mastodon stack is powered by the following components:
 ├── mastodon  # mastodon installation 
 └── observability # set up observability stack
 ```
+
 Follow the guide in the order stated below:
-1. [DigitalOcean Infrastructure Automation via Terraform ](./infrastructure/terraform/README.md)
+
+1. [DigitalOcean Infrastructure Automation via Terraform](./infrastructure/terraform/README.md)
 2. [Mastodon installation using Bitnami Helm chart](./mastodon/README.md)
 3. [Set up Observability using Robusta](./observability/README.md)
 

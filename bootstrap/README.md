@@ -1,6 +1,7 @@
 # Bootstrapping using Argo CD
 
 ## Overview
+
 The bootstrapper leverages the ArgoCD's "App of Apps" pattern. Here we use Helm package management to achieve this.
 
 ```bash
@@ -14,8 +15,8 @@ The bootstrapper leverages the ArgoCD's "App of Apps" pattern. Here we use Helm 
 └── values.yaml # chart overrides: enable/diable apps
 ```
 
-In this case, the parent app "**bootstrap**" is installed along with its *child apps* which are rendered from `templates/` and `bootstrap-resources/` directories. 
-By default, we have enabled most of the apps, but you can easily enable them by setting the flags in the [values.yaml](./values.yaml) 
+In this case, the parent app "**bootstrap**" is installed along with its *child apps* which are rendered from `templates/` and `bootstrap-resources/` directories.
+By default, we have enabled most of the apps, but you can easily enable them by setting the flags in the [values.yaml](./values.yaml)
 
 ```yaml
 # values.yaml
@@ -25,9 +26,11 @@ domain: "mastodon.hivenetes.com"
 traefik:
   enable: true
 ```
+
 > **Note:** Save changes to the file as deemed fit and push the changes to the git repository. The bootstrapper follows a strict GitOps workflow, so all the changes need to be pushed to git to reflect the changes in the Kubernetes cluster.
 
 **Access the ArgoCD Web UI**
+
 ```bash
 # Get the argo password
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
