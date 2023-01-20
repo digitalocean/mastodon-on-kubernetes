@@ -21,7 +21,7 @@ By default, we have enabled most of the apps, but you can easily enable them by 
 ```yaml
 # values.yaml
 # Global Parameters (REQUIRED)
-domain: "mastodon.hivenetes.com"
+domain: ""
 # Application specific
 traefik:
   enable: true

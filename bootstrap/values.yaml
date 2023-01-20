@@ -1,5 +1,6 @@
 # Global Parameters (REQUIRED)
-domain: "mastodon.hivenetes.com"
+# Add your domain
+domain: "" 
 # Application specific
 traefik:
   enable: true

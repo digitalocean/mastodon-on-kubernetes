@@ -5,7 +5,7 @@ metadata:
   name: letsencrypt-issuer
 spec:
   acme:
-    email: hivenetes@gmail.com
+    email: admin@example.com
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: letsencrypt-issuer-account-key
