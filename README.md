@@ -39,7 +39,13 @@ Follow the guide in the order stated below:
 
 Here is the overview of the architecture that we will set up:
 
-<!-- <img src="./docs/assets/mok-overview.png" alt="mok-overview" width=800 height=450/> -->
 ![mok-overview](./docs/assets/mok-overview.png)
 
-**Happy Mastodoning!**
+## Useful Resources
+
+- [Blog: Mastodon on DigitalOcean Kubernetes](https://docs.digitalocean.com/developer-center/mastodon-on-digitalocean-kubernetes/)
+- [Blog: How Hachyderm leveraged DigitalOcean Spaces to scale their Mastodon community](https://www.digitalocean.com/blog/digitalocean-spaces-mastodon-hachyderm)
+- [DigitalOcean Managed Kubernetes](https://www.digitalocean.com/products/kubernetes)
+- [DigitalOcean Object Storage(Spaces)](https://www.digitalocean.com/products/spaces)
+- [DigitalOcean Managed DBaaS](https://www.digitalocean.com/resources/managed-databases)
+- [Kubernetes Bootstrapper Project](https://github.com/hivenetes/k8s-bootstrapper)

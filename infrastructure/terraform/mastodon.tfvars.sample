@@ -17,19 +17,19 @@ doks_default_node_pool = {
 
 # Create additional DOKS node pools 
 # Dedicated node pools are useful to spread the load 
-#  created by each component, such as: web, streaming or sideqkiq (OPTIONAL)
+# Created by each component, such as: web, streaming or sidekiq (OPTIONAL)
 
 doks_additional_node_pools = {
   "mastodon-web" = {
-    node_count = 1
+    node_count = 2
     size       = "s-2vcpu-4gb"
   },
   "mastodon-streaming" = {
-    node_count = 1
+    node_count = 2
     size       = "s-2vcpu-4gb"
   },
   "mastodon-sidekiq" = {
-    node_count = 1
+    node_count = 2
     size       = "s-2vcpu-4gb"
   }
 }

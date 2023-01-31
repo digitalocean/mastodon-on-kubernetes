@@ -40,3 +40,6 @@ terraform.rc
 
 # vs code
 *.vscode
+
+# observability: robusta.dev config
+generated_values.yaml
