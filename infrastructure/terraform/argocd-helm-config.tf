@@ -10,8 +10,8 @@ resource "helm_release" "argocd" {
 
 
   # Additional Helm values
-
-#   values = [
-#     file(var.argocd_additional_helm_values_file)
-#   ]
+  # Uncomment to enable
+  # values = [
+  #   file(var.argocd_additional_helm_values_file)
+  # ]
 }

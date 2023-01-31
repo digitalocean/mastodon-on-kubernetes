@@ -182,6 +182,6 @@ variable "argocd_k8s_namespace" {
 
 variable "argocd_additional_helm_values_file" {
   type        = string
-  default     = "argocd-ha-helm-values.yaml"
+  default     = "../manifests/argocd-ha-helm-values.yaml"
   description = "Additional Helm values to use"
 }
