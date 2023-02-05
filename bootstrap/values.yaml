@@ -1,5 +1,5 @@
 # Global Parameters (REQUIRED)
-# Add your domain
+# Add your domain (REQUIRED)
 domain: "" 
 # Application specific
 traefik:

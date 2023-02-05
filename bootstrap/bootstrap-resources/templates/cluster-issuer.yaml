@@ -5,6 +5,7 @@ metadata:
   name: letsencrypt-issuer
 spec:
   acme:
+    # REQUIRED CHANGE
     email: admin@example.com
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
