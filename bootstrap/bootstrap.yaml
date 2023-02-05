@@ -10,6 +10,7 @@ spec:
   project: default
   source:
     path: bootstrap
+    # REQUIRED CHANGE
     repoURL: https://github.com/digitalocean/mastodon-on-kubernetes
     targetRevision: HEAD
   syncPolicy:
