@@ -6,6 +6,8 @@ metadata:
 spec:
   acme:
     # REQUIRED CHANGE
+    # Let's Encrypt will use this to contact you about expiring
+    # certificates and issues related to your account.
     email: admin@example.com
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
