@@ -67,12 +67,12 @@ This section will walk you through installing Mastodon on Kubernetes using [Bitn
     - [Cert-Manager](https://cert-manager.io/)
     - [Metrics-Server](https://github.com/kubernetes-sigs/metrics-server)
 
-    Check out [this doc](../bootstrap/README.md) for more details on the bootstrap process.
+    > **Check out [this doc](../bootstrap/README.md) for more details on the bootstrap process.**
 
     Clone/fork this repository and make the required changes inside the [bootstrap directory](../bootstrap/):
 
-    1. The email address for the LetsEncrypt [cluster issuer](../bootstrap/bootstrap-resources/templates/cluster-issuer.yaml)
-    2. The repository URLs for the [bootstrap](../bootstrap/bootstrap.yaml) and [boostrap-resources](../bootstrap/templates/bootstrap-resources.yaml)
+    - The email address for the LetsEncrypt [cluster issuer](../bootstrap/bootstrap-resources/templates/cluster-issuer.yaml)
+    - The repository URLs for the [bootstrap](../bootstrap/bootstrap.yaml) and [boostrap-resources](../bootstrap/templates/bootstrap-resources.yaml)
     3. The Site URL in [values.yaml](../bootstrap/values.yaml)
 
     Then, run the following command, substituting your repository URL:
